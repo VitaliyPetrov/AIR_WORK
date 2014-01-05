@@ -1,8 +1,6 @@
-package com.vitaliypetrov.windview.Start;
+package com.vitaliypetrov.windview.start;
 
-import com.vitaliypetrov.windview.UI.WVFrame;
-
-import javax.swing.*;
+import com.vitaliypetrov.windview.ui.WVFrame;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,9 +9,8 @@ import javax.swing.*;
  * Time: 2:43 PM
  */
 public class Start {
+
     public static void main(String[] args){
-        WVFrame mainWindow = new WVFrame();
-        mainWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        mainWindow.setVisible(true);
+        new WVFrame();
     }
 }

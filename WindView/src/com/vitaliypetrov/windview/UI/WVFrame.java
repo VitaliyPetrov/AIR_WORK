@@ -1,4 +1,4 @@
-package com.vitaliypetrov.windview.UI;
+package com.vitaliypetrov.windview.ui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,9 @@ import java.awt.*;
 public class WVFrame extends JFrame {
     private final int FRAME_WIDTH = 500;
     private final int FRAME_HEIGHT = 500;
-    private final String PROJECT_NAME = "WV" ;
+    private final String PROJECT_NAME = "WV";
+
+    public  JTextArea eventBox =null;
 
     /**
      * Constructor for main application window
@@ -29,11 +31,17 @@ public class WVFrame extends JFrame {
         JPanel rootPanel =new JPanel();
         rootPanel.setLayout(null);
 
-        //Create and add JPanel with JTextArea for even log
+        //Create and add JPanel with JTextArea for event log
         WVPanel eventPanel = new WVPanel();
+
+        eventBox = eventPanel.getEventBox();
 
         rootPanel.add(eventPanel);
         this.add(rootPanel);
 
+    }
+
+    public JTextArea getEventBox(){
+        return  eventBox;
     }
 }

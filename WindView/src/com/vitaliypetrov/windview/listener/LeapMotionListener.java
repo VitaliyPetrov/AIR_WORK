@@ -1,8 +1,7 @@
 package com.vitaliypetrov.windview.listener;
 
 import com.leapmotion.leap.*;
-
-import javax.swing.*;
+import com.vitaliypetrov.windview.ui.WVFrame;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,21 +12,20 @@ import javax.swing.*;
 
 public class LeapMotionListener extends Listener {
 
-    private final JTextArea eventBox;
+    private WVFrame view;
 
-    public LeapMotionListener(JTextArea eventBox) {
-        this.eventBox = eventBox;
+    public LeapMotionListener(WVFrame view) {
+        this.view = view;
     }
 
     @Override
     public void onInit(Controller controller) {
-       eventBox.append("\n");
-       eventBox.append("Initialized");
+       view.writeToEventBox("Initialized");
     }
 
     @Override
     public void onConnect(Controller controller) {
-        eventBox.append("\nConnected");
+        view.writeToEventBox("Connected");
         controller.enableGesture(Gesture.Type.TYPE_SWIPE);
         controller.enableGesture(Gesture.Type.TYPE_CIRCLE);
         controller.enableGesture(Gesture.Type.TYPE_SCREEN_TAP);
@@ -37,19 +35,19 @@ public class LeapMotionListener extends Listener {
     @Override
     public void onDisconnect(Controller controller) {
         //Note: not dispatched when running in a debugger.
-        eventBox.append("Disconnected");
+        view.writeToEventBox("Disconnected");
     }
 
     @Override
     public void onExit(Controller controller) {
-        eventBox.append("Exited");
+        view.writeToEventBox("Exited");
     }
 
     @Override
     public void onFrame(Controller controller) {
         // Get the most recent frame and report some basic information
         Frame frame = controller.frame();
-        eventBox.append("\nFrame id: " + frame.id()
+        view.writeToEventBox("\nFrame id: " + frame.id()
                 + ", timestamp: " + frame.timestamp()
                 + ", hands: " + frame.hands().count()
                 + ", fingers: " + frame.fingers().count()
@@ -69,12 +67,12 @@ public class LeapMotionListener extends Listener {
                     avgPos = avgPos.plus(finger.tipPosition());
                 }
                 avgPos = avgPos.divide(fingers.count());
-                eventBox.append("\nHand has " + fingers.count()
+                view.writeToEventBox("\nHand has " + fingers.count()
                         + " fingers, average finger tip position: " + avgPos);
             }
 
             // Get the hand's sphere radius and palm position
-            eventBox.append("\nHand sphere radius: " + hand.sphereRadius()
+            view.writeToEventBox("\nHand sphere radius: " + hand.sphereRadius()
                     + " mm, palm position: " + hand.palmPosition());
 
             // Get the hand's normal vector and direction
@@ -82,7 +80,7 @@ public class LeapMotionListener extends Listener {
             Vector direction = hand.direction();
 
             // Calculate the hand's pitch, roll, and yaw angles
-            eventBox.append("\nHand pitch: " + Math.toDegrees(direction.pitch()) + " degrees, "
+            view.writeToEventBox("\nHand pitch: " + Math.toDegrees(direction.pitch()) + " degrees, "
                     + "roll: " + Math.toDegrees(normal.roll()) + " degrees, "
                     + "yaw: " + Math.toDegrees(direction.yaw()) + " degrees");
         }
@@ -111,7 +109,7 @@ public class LeapMotionListener extends Listener {
                         sweptAngle = (circle.progress() - previousUpdate.progress()) * 2 * Math.PI;
                     }
 
-                    eventBox.append("\nCircle id: " + circle.id()
+                    view.writeToEventBox("\nCircle id: " + circle.id()
                             + ", " + circle.state()
                             + ", progress: " + circle.progress()
                             + ", radius: " + circle.radius()
@@ -120,7 +118,7 @@ public class LeapMotionListener extends Listener {
                     break;
                 case TYPE_SWIPE:
                     SwipeGesture swipe = new SwipeGesture(gesture);
-                    eventBox.append("\nSwipe id: " + swipe.id()
+                    view.writeToEventBox("\nSwipe id: " + swipe.id()
                             + ", " + swipe.state()
                             + ", position: " + swipe.position()
                             + ", direction: " + swipe.direction()
@@ -128,26 +126,26 @@ public class LeapMotionListener extends Listener {
                     break;
                 case TYPE_SCREEN_TAP:
                     ScreenTapGesture screenTap = new ScreenTapGesture(gesture);
-                    eventBox.append("\nScreen Tap id: " + screenTap.id()
+                    view.writeToEventBox("\nScreen Tap id: " + screenTap.id()
                             + ", " + screenTap.state()
                             + ", position: " + screenTap.position()
                             + ", direction: " + screenTap.direction());
                     break;
                 case TYPE_KEY_TAP:
                     KeyTapGesture keyTap = new KeyTapGesture(gesture);
-                    eventBox.append("\nKey Tap id: " + keyTap.id()
+                    view.writeToEventBox("\nKey Tap id: " + keyTap.id()
                             + ", " + keyTap.state()
                             + ", position: " + keyTap.position()
                             + ", direction: " + keyTap.direction());
                     break;
                 default:
-                    eventBox.append("\nUnknown gesture type.");
+                    view.writeToEventBox("\nUnknown gesture type.");
                     break;
             }
         }
 
         if (!frame.hands().isEmpty() || !gestures.isEmpty()) {
-            System.out.println();
+            view.writeToEventBox("Hands or gestures not detected");
         }
     }
 }

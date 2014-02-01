@@ -1,6 +1,6 @@
 package com.vitaliypetrov.windview.start;
 
-import com.vitaliypetrov.windview.ui.WVFrame;
+import com.vitaliypetrov.windview.ui.WVDotsFrame;
 
 /**
  * Created with IntelliJ IDEA.
@@ -8,9 +8,9 @@ import com.vitaliypetrov.windview.ui.WVFrame;
  * Date: 10/27/13
  * Time: 2:43 PM
  */
-public class Start {
+public class StartWVDots {
 
     public static void main(String[] args){
-        new WVFrame();
+        new WVDotsFrame();
     }
 }

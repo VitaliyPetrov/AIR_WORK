@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  * Date: 2/17/14
  * Time: 5:56 PM
  */
-public class FileFineder {
+public class FileFinder {
 
     // Classes for work with RegExp
     private Pattern p = null;
@@ -30,10 +30,20 @@ public class FileFineder {
     private final int DIRECTORIES = 1;
     private final int ALL = 2;
 
+
+    public static void main(String[] args){
+        FileFinder ff = new FileFinder();
+        try {
+
+            System.out.println(ff.findFiles("D:/","png"));
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
     /**
      * Constructor
      */
-    public FileFineder() {
+    public FileFinder() {
     }
 
     /**

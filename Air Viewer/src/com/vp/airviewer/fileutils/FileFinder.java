@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
  */
 public class FileFinder {
 
+    public static final String IMAGE_FORMATS = "([^\\s]+(\\.(?i)(jpg|png|bmp))$)";
+    public static final String START_PATH = "D:\\Photos\\";
     // Classes for work with RegExp
     private Pattern p = null;
     private Matcher m = null;
@@ -30,16 +32,18 @@ public class FileFinder {
     private final int DIRECTORIES = 1;
     private final int ALL = 2;
 
-
-    public static void main(String[] args){
+    /*
+         Test method
+     */
+   /* public static void main(String[] args){
         FileFinder ff = new FileFinder();
         try {
 
-            System.out.println(ff.findFiles("D:/","png"));
+            System.out.println(ff.findFiles(START_PATH, IMAGE_FORMATS));
         } catch (Exception e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
-    }
+    }*/
     /**
      * Constructor
      */
@@ -243,7 +247,6 @@ public class FileFinder {
                     res.add(list[i]);
                 }
             }
-
         }
     }
 }

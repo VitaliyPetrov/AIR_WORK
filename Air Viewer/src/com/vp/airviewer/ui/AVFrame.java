@@ -2,6 +2,8 @@ package com.vp.airviewer.ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Main window of app.
@@ -33,6 +35,25 @@ public class AVFrame extends JFrame {
 
         AddRootPanel();
 
+        //Config frame
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        addWindowListener( new WindowAdapter() {
+            /**
+             * Invoked when a window is in the process of being closed.
+             * The close operation can be overridden at this point.
+             */
+            @Override
+            public void windowClosing(WindowEvent e) {
+                rp.stopListening();
+                System.exit(0);
+            }
+        });
+
+        pack();
+        setResizable(false);
+        setLocationRelativeTo(null); // center the window
+        setVisible(true);
     }
 
     /**

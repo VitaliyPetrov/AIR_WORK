@@ -11,6 +11,8 @@ import java.awt.*;
  * Time: 7:17 PM
  */
 public class AVFrame extends JFrame {
+
+    private RootPanel rp;
     /**
      * Creates a new, initially invisible <code>Frame</code> with the
      * specified title.
@@ -28,6 +30,17 @@ public class AVFrame extends JFrame {
      */
     public AVFrame(String title) throws HeadlessException {
         super(title);
-        // add UI elements
+
+        AddRootPanel();
+
+    }
+
+    /**
+     * Method add root panel into frame
+     */
+    private void AddRootPanel() {
+        rp = new RootPanel();
+        Container container = getContentPane();
+        container.add(rp);
     }
 }

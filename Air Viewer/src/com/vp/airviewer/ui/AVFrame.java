@@ -15,6 +15,7 @@ import java.awt.event.WindowEvent;
 public class AVFrame extends JFrame {
 
     private RootPanel rp;
+
     /**
      * Creates a new, initially invisible <code>Frame</code> with the
      * specified title.
@@ -33,12 +34,13 @@ public class AVFrame extends JFrame {
     public AVFrame(String title) throws HeadlessException {
         super(title);
 
+
         AddRootPanel();
 
         //Config frame
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        addWindowListener( new WindowAdapter() {
+        addWindowListener(new WindowAdapter() {
             /**
              * Invoked when a window is in the process of being closed.
              * The close operation can be overridden at this point.

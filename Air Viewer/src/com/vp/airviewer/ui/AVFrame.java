@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 /**
  * Main window of app.
@@ -14,7 +15,11 @@ import java.awt.event.WindowEvent;
  */
 public class AVFrame extends JFrame {
 
+    private final int FRAME_WIDTH = 500;
+    private final int FRAME_HEIGHT = 500;
+
     private RootPanel rp;
+    private ArrayList<String> imageList;
 
     /**
      * Creates a new, initially invisible <code>Frame</code> with the
@@ -31,15 +36,15 @@ public class AVFrame extends JFrame {
      * @see java.awt.Component#setVisible
      * @see javax.swing.JComponent#getDefaultLocale
      */
-    public AVFrame(String title) throws HeadlessException {
+    public AVFrame(String title, ArrayList<String> imageList) throws HeadlessException {
         super(title);
+        this.imageList = imageList;
 
-
-        AddRootPanel();
+        AddRootPanel(imageList);
 
         //Config frame
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+        setSize(FRAME_WIDTH, FRAME_HEIGHT);
         addWindowListener(new WindowAdapter() {
             /**
              * Invoked when a window is in the process of being closed.
@@ -52,8 +57,8 @@ public class AVFrame extends JFrame {
             }
         });
 
-        pack();
-        setResizable(false);
+        //pack();
+        //setResizable(false);
         setLocationRelativeTo(null); // center the window
         setVisible(true);
     }
@@ -61,8 +66,8 @@ public class AVFrame extends JFrame {
     /**
      * Method add root panel into frame
      */
-    private void AddRootPanel() {
-        rp = new RootPanel();
+    private void AddRootPanel(ArrayList<String> imageList) {
+        rp = new RootPanel(imageList);
         Container container = getContentPane();
         container.add(rp);
     }

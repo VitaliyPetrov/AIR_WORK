@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class FileFinder {
 
     public static final String IMAGE_FORMATS = "([^\\s]+(\\.(?i)(jpg|png|bmp))$)";
-    public static final String START_PATH = "D:\\Photos\\";
+    public static final String START_PATH = "D:\\SkyDrive\\Pictures\\";
     // Classes for work with RegExp
     private Pattern p = null;
     private Matcher m = null;
@@ -32,10 +32,8 @@ public class FileFinder {
     private final int DIRECTORIES = 1;
     private final int ALL = 2;
 
-    /*
-         Test method
-     */
-   /* public static void main(String[] args){
+    //  Test method
+  /*  public static void main(String[] args){
         FileFinder ff = new FileFinder();
         try {
 
@@ -44,15 +42,18 @@ public class FileFinder {
             e.printStackTrace();
         }
     }*/
+
     /**
      * Constructor
      */
     public FileFinder() {
+        super();
     }
 
     /**
      * This method using for search for all objects (files and dirs),
      * start from start directory (startPath)
+     *
      * @param startPath Start directory for search
      * @return List (List) founded objects
      * @throws java.lang.Exception if error occurred while searching
@@ -65,10 +66,11 @@ public class FileFinder {
      * This method using for search for all objects (files and dirs),
      * that is equal mask (mask),
      * start from start directory (startPath)
+     *
      * @param startPath Start directory for search
-     * @param mask RegExp for equals founded objects
-     * @throws java.lang.Exception if error occurred while searching
+     * @param mask      RegExp for equals founded objects
      * @return List (List) founded objects
+     * @throws java.lang.Exception if error occurred while searching
      */
     public List findAll(String startPath, String mask)
             throws Exception {
@@ -78,6 +80,7 @@ public class FileFinder {
     /**
      * This method using for search for all files,
      * start from start directory (startPath)
+     *
      * @param startPath Start directory for search
      * @return List (List) founded objects
      * @throws java.lang.Exception if error occurred while searching
@@ -91,10 +94,11 @@ public class FileFinder {
      * This method using for search for all files,
      * that is equal mask (mask),
      * start from start directory (startPath)
+     *
      * @param startPath Start directory for search
-     * @param mask RegExp for equals founded objects
-     * @throws java.lang.Exception if error occurred while searching
+     * @param mask      RegExp for equals founded objects
      * @return List (List) founded objects
+     * @throws java.lang.Exception if error occurred while searching
      */
     public List findFiles(String startPath, String mask)
             throws Exception {
@@ -102,13 +106,14 @@ public class FileFinder {
     }
 
     /**
-    * This method using for search for all dirs),
-    * start from start directory (startPath)
-    * @param startPath Start directory for search
-    * @return List (List) founded objects
-    * @throws java.lang.Exception if error occurred while searching
-    */
-     public List findDirectories(String startPath)
+     * This method using for search for all dirs),
+     * start from start directory (startPath)
+     *
+     * @param startPath Start directory for search
+     * @return List (List) founded objects
+     * @throws java.lang.Exception if error occurred while searching
+     */
+    public List findDirectories(String startPath)
             throws Exception {
         return find(startPath, "", DIRECTORIES);
     }
@@ -117,10 +122,11 @@ public class FileFinder {
      * This method using for search for all DIRSs,
      * that is equal mask (mask),
      * start from start directory (startPath)
+     *
      * @param startPath Start directory for search
-     * @param mask RegExp for equals founded objects
-     * @throws java.lang.Exception if error occurred while searching
+     * @param mask      RegExp for equals founded objects
      * @return List (List) founded objects
+     * @throws java.lang.Exception if error occurred while searching
      */
     public List findDirectories(String startPath, String mask)
             throws Exception {
@@ -129,6 +135,7 @@ public class FileFinder {
 
     /**
      * Return total size of founded files
+     *
      * @return size of founded (byte)
      */
     public long getDirectorySize() {
@@ -137,6 +144,7 @@ public class FileFinder {
 
     /**
      * Return total count of founded files
+     *
      * @return total count of founded files
      */
     public long getFilesNumber() {
@@ -145,6 +153,7 @@ public class FileFinder {
 
     /**
      * Return total count of founded directories
+     *
      * @return total count of founded directories
      */
     public long getDirectoriesNumber() {
@@ -154,22 +163,22 @@ public class FileFinder {
 
     /**
      * Check if name equals REgExp
+     *
      * @param name File name
      * @return true if name is equals, otherwise false
      */
     private boolean accept(String name) {
         // check if RegExp isn't set
-        if(p == null) {
+        if (p == null) {
             // then object approach
             return true;
         }
         //create Matcher
         m = p.matcher(name);
         //checking
-        if(m.matches()) {
+        if (m.matches()) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -177,8 +186,9 @@ public class FileFinder {
     /**
      * This method initialize search setup,
      * than call method search
-     * @param startPath Start directory for search
-     * @param mask RegExp for equals founded objects
+     *
+     * @param startPath  Start directory for search
+     * @param mask       RegExp for equals founded objects
      * @param objectType Object type for search (ALL, DIRECTORY,FILE)
      * @return List of founded objects
      * @throws Exception if error occurred while searching
@@ -186,15 +196,15 @@ public class FileFinder {
     private List find(String startPath, String mask, int objectType)
             throws Exception {
         //parameter check
-        if(startPath == null || mask == null) {
+        if (startPath == null || mask == null) {
             throw new Exception("Error: Search parameter not set");
         }
         File topDirectory = new File(startPath);
-        if(!topDirectory.exists()) {
+        if (!topDirectory.exists()) {
             throw new Exception("Error: Path not set");
         }
         //If RegExp exists, create Pattern
-        if(!mask.equals("")) {
+        if (!mask.equals("")) {
             p = Pattern.compile(mask, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
         }
         //The counter is reset
@@ -215,19 +225,20 @@ public class FileFinder {
 
     /**
      * This method is searching objects by selected type.
-     * @param topDirectory  Current directory
-     * @param res           Results of search
-     * @param objectType    Object type
+     *
+     * @param topDirectory Current directory
+     * @param res          Results of search
+     * @param objectType   Object type
      */
     private void search(File topDirectory, List res, int objectType) {
         //Get all objects in directory
         File[] list = topDirectory.listFiles();
         // view each object
-        for(int i = 0; i < list.length; i++) {
+        for (int i = 0; i < list.length; i++) {
             //if directory...
-            if(list[i].isDirectory()) {
+            if (list[i].isDirectory()) {
                 //checking object type and RegExp match
-                if(objectType != FILES && accept(list[i].getName())) {
+                if (objectType != FILES && accept(list[i].getName())) {
                     //add current object to result list,
                     //and update counters
                     directoriesNumber++;
@@ -239,7 +250,7 @@ public class FileFinder {
             //if it is file
             else {
                 //checking object type and RegExp match
-                if(objectType != DIRECTORIES && accept(list[i].getName())) {
+                if (objectType != DIRECTORIES && accept(list[i].getName())) {
                     //add current object to result list,
                     //and update counters
                     filesNumber++;

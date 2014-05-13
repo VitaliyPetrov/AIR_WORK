@@ -69,6 +69,6 @@ public class AVFrame extends JFrame {
     private void AddRootPanel(ArrayList<String> imageList) {
         rp = new RootPanel(imageList);
         Container container = getContentPane();
-        container.add(rp);
+        container.add(rp.getScrollPane());
     }
 }

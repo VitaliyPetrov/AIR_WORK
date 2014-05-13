@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class FileFinder {
 
     public static final String IMAGE_FORMATS = "([^\\s]+(\\.(?i)(jpg|png|bmp))$)";
-    public static final String START_PATH = "D:\\SkyDrive\\Pictures\\";
+    public static final String START_PATH = "D:\\OneDrive\\Pictures\\";
     // Classes for work with RegExp
     private Pattern p = null;
     private Matcher m = null;

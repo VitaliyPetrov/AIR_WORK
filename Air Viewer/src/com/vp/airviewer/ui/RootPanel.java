@@ -23,6 +23,8 @@ public class RootPanel extends JPanel {
 
     private BufferedImage bufferedImage;
     private JLabel imgLabel;
+    private JScrollPane scrollPane;
+
 
     private ArrayList imageList = null;
 
@@ -43,10 +45,14 @@ public class RootPanel extends JPanel {
 
     private void addImageLabel() {
         imgLabel = new JLabel();
-        JScrollPane scrollPane = new JScrollPane(imgLabel);
+        scrollPane = new JScrollPane(imgLabel);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        add(scrollPane);
+
+    }
+
+    public JScrollPane getScrollPane() {
+        return scrollPane;
     }
 
     /**

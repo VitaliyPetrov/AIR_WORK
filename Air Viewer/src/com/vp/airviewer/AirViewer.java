@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class AirViewer {
     public static final String IMAGE_FORMATS = "([^\\s]+(\\.(?i)(jpg|png|bmp))$)";
-    public static final String START_PATH = "D:\\SkyDrive\\Pictures\\";
+    public static final String START_PATH = "D:\\SkyDrive\\Photos";
 
     public static void main(String[] args) {
         FileFinder imageFinder = new FileFinder();

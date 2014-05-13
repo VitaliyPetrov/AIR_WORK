@@ -1,14 +1,11 @@
 package com.vp.airviewer.ui;
 
 import com.leapmotion.leap.Controller;
+import com.vp.airviewer.fileutils.FileOperations;
 import com.vp.airviewer.listener.AVListener;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,27 +18,27 @@ public class RootPanel extends JPanel {
     private AVListener listener;
     private Controller controller;
 
-    private BufferedImage bufferedImage;
     private JLabel imgLabel;
     private JScrollPane scrollPane;
 
 
-    private ArrayList imageList = null;
+    private FileOperations fileOperations = null;
 
     /**
      * Creates a new <code>JPanel</code> with a double buffer
      * and a flow layout.
      */
-    public RootPanel(ArrayList imageList) {
+    public RootPanel(FileOperations fileOperations) {
 
-        this.imageList = imageList;
+        this.fileOperations = fileOperations;
         listener = new AVListener(this);
         controller = new Controller();
         controller.addListener(listener);
 
         addImageLabel();
-        showImage((File) this.imageList.get(0));
+        showImage(this.fileOperations.firstImage());
     }
+
 
     private void addImageLabel() {
         imgLabel = new JLabel();
@@ -63,21 +60,16 @@ public class RootPanel extends JPanel {
         controller.removeListener(listener);
     }
 
-    public void showImage(File imagePath) {
-        try {
-            bufferedImage = ImageIO.read(imagePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void showImage(BufferedImage bufferedImage) {
         ImageIcon icon = new ImageIcon(bufferedImage);
         imgLabel.setIcon(icon);
     }
 
     public void nextImage() {
-        showImage((File) this.imageList.get(1));
+        showImage(this.fileOperations.nextImage());
     }
 
     public void previosImage() {
-        showImage((File) this.imageList.get(0));
+        showImage(this.fileOperations.previousImage());
     }
 }

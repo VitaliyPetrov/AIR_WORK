@@ -1,10 +1,11 @@
 package com.vp.airviewer.ui;
 
+import com.vp.airviewer.fileutils.FileOperations;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
 /**
  * Main window of app.
@@ -19,7 +20,7 @@ public class AVFrame extends JFrame {
     private final int FRAME_HEIGHT = 500;
 
     private RootPanel rp;
-    private ArrayList<String> imageList;
+    private FileOperations fileOperations;
 
     /**
      * Creates a new, initially invisible <code>Frame</code> with the
@@ -36,11 +37,11 @@ public class AVFrame extends JFrame {
      * @see java.awt.Component#setVisible
      * @see javax.swing.JComponent#getDefaultLocale
      */
-    public AVFrame(String title, ArrayList<String> imageList) throws HeadlessException {
+    public AVFrame(String title, FileOperations fileOperations) throws HeadlessException {
         super(title);
-        this.imageList = imageList;
+        this.fileOperations = fileOperations;
 
-        AddRootPanel(imageList);
+        AddRootPanel(fileOperations);
 
         //Config frame
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -66,8 +67,8 @@ public class AVFrame extends JFrame {
     /**
      * Method add root panel into frame
      */
-    private void AddRootPanel(ArrayList<String> imageList) {
-        rp = new RootPanel(imageList);
+    private void AddRootPanel(FileOperations fileOperations) {
+        rp = new RootPanel(fileOperations);
         Container container = getContentPane();
         container.add(rp.getScrollPane());
     }

@@ -1,6 +1,7 @@
 package com.vp.airviewer;
 
 import com.vp.airviewer.fileutils.FileFinder;
+import com.vp.airviewer.fileutils.FileOperations;
 import com.vp.airviewer.ui.AVFrame;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class AirViewer {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        new AVFrame("Air Viewer", imageList);
+        FileOperations fileOperations = new FileOperations(imageList);
+        new AVFrame("Air Viewer", fileOperations);
     }
 }

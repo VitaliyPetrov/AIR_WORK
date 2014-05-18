@@ -24,29 +24,34 @@ public class FileOperations {
     }
 
     public BufferedImage nextImage() {
-        boolean isOutOfBounds = checkBounds(currentPosition);
-        BufferedImage bufferedImage = null;
-        if (!isOutOfBounds) {
-            try {
-                bufferedImage = ImageIO.read((File) imageList.get(currentPosition + 1));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        BufferedImage bufferedImage = getImageAt(currentPosition + 1);
+        if (bufferedImage != null) {
             currentPosition++;
         }
         return bufferedImage;
     }
 
     public BufferedImage previousImage() {
-        boolean isOutOfBounds = checkBounds(currentPosition);
+        BufferedImage bufferedImage = getImageAt(currentPosition - 1);
+        if (bufferedImage != null) {
+            currentPosition--;
+        }
+        return bufferedImage;
+    }
+
+    public BufferedImage firstImage() {
+        return getImageAt(0);
+    }
+
+    private BufferedImage getImageAt(int index) {
+        boolean isOutOfBounds = checkBounds(index);
         BufferedImage bufferedImage = null;
         if (!isOutOfBounds) {
             try {
-                bufferedImage = ImageIO.read((File) imageList.get(currentPosition - 1));
+                bufferedImage = ImageIO.read((File) imageList.get(index));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            currentPosition--;
         }
         return bufferedImage;
     }
@@ -55,13 +60,4 @@ public class FileOperations {
         return currentPosition < 0 || currentPosition > IMAGE_LIST_LENGTH;
     }
 
-    public BufferedImage firstImage() {
-        BufferedImage bufferedImage = null;
-        try {
-            bufferedImage = ImageIO.read((File) imageList.get(0));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bufferedImage;
-    }
 }

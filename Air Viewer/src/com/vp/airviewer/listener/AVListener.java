@@ -68,7 +68,7 @@ public class AVListener extends Listener {
                     if (direction.getX() > 0) {
                         rp.nextImage();  //right direction
                     } else {
-                        rp.previosImage(); //left direction
+                        rp.previousImage(); //left direction
                     }
                     break;
                 case TYPE_CIRCLE:

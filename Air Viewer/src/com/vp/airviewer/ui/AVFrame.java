@@ -40,6 +40,15 @@ public class AVFrame extends JFrame {
         super(title);
         this.fileOperations = fileOperations;
 
+        //Config frame
+        //TODO: Set absolute path
+        setIconImage(new ImageIcon(LOGO_PATH).getImage());
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null); // center the window
+
+        fileOperations.setFrame(this);
+
         AddRootPanel(fileOperations);
 
         addWindowListener(new WindowAdapter() {
@@ -54,14 +63,8 @@ public class AVFrame extends JFrame {
             }
         });
 
-
-        //Config frame
-        //TODO: Set absolute path
-        this.setIconImage(new ImageIcon(LOGO_PATH).getImage());
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        setLocationRelativeTo(null); // center the window
         setVisible(true);
+        rp.showFirstImage();
     }
 
     /**

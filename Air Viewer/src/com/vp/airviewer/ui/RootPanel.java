@@ -36,7 +36,7 @@ public class RootPanel extends JPanel {
         controller.addListener(listener);
 
         addImageLabel();
-        showImage(this.fileOperations.firstImage());
+
     }
 
 
@@ -69,7 +69,11 @@ public class RootPanel extends JPanel {
         showImage(this.fileOperations.nextImage());
     }
 
-    public void previosImage() {
+    public void previousImage() {
         showImage(this.fileOperations.previousImage());
+    }
+
+    public void showFirstImage() {
+        showImage(this.fileOperations.firstImage());
     }
 }

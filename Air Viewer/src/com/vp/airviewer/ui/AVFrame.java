@@ -16,8 +16,7 @@ import java.awt.event.WindowEvent;
  */
 public class AVFrame extends JFrame {
 
-    private final int FRAME_WIDTH = 500;
-    private final int FRAME_HEIGHT = 500;
+    private static final String LOGO_PATH = "/logo.png";
 
     private RootPanel rp;
     private FileOperations fileOperations;
@@ -43,9 +42,6 @@ public class AVFrame extends JFrame {
 
         AddRootPanel(fileOperations);
 
-        //Config frame
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(FRAME_WIDTH, FRAME_HEIGHT);
         addWindowListener(new WindowAdapter() {
             /**
              * Invoked when a window is in the process of being closed.
@@ -58,8 +54,12 @@ public class AVFrame extends JFrame {
             }
         });
 
-        //pack();
-        //setResizable(false);
+
+        //Config frame
+        //TODO: Set absolute path
+        this.setIconImage(new ImageIcon(LOGO_PATH).getImage());
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null); // center the window
         setVisible(true);
     }

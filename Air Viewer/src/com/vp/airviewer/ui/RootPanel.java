@@ -76,4 +76,13 @@ public class RootPanel extends JPanel {
     public void showFirstImage() {
         showImage(this.fileOperations.firstImage());
     }
+
+    public void rotateImgRight() {
+        showImage(this.fileOperations.rotateImageRight());
+    }
+
+    public void rotateImgLeft() {
+        showImage(this.fileOperations.rotateImageLeft());
+    }
+
 }

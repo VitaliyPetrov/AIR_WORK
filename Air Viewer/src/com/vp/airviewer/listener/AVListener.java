@@ -27,6 +27,7 @@ public class AVListener extends Listener {
     @Override
     public void onConnect(Controller controller) {
         controller.enableGesture(Gesture.Type.TYPE_SWIPE);
+        controller.enableGesture(Gesture.Type.TYPE_CIRCLE);
     }
 
     @Override
@@ -73,7 +74,17 @@ public class AVListener extends Listener {
                     break;
                 case TYPE_CIRCLE:
                     CircleGesture circleGesture = new CircleGesture(gesture);
-                    //to do
+                    // Calculate clock direction using the angle between circle normal and pointable
+                    String clockwiseness;
+                    if (circleGesture.pointable().direction().angleTo(circleGesture.normal()) <= Math.PI / 4) {
+                        // Clockwise if angle is less than 90 degrees
+                        clockwiseness = "clockwise";
+                        rp.rotateImgRight();
+                    } else {
+                        clockwiseness = "counterclockwise";
+                        rp.rotateImgLeft();
+                    }
+                    break;
             }
         }
     }

@@ -4,6 +4,8 @@ import com.vp.airviewer.ui.AVFrame;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -123,5 +125,29 @@ public class FileOperations {
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         return resizedImage;
+    }
+
+    public BufferedImage rotateImage(double angel) {
+        BufferedImage originalImage = getImageAt(currentPosition);
+        double h = originalImage.getHeight();
+        double w = originalImage.getWidth();
+
+        AffineTransform tx = new AffineTransform();
+        tx.rotate(angel, w / 2, h / 2);//(radian,arbit_X,arbit_Y)
+
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+        BufferedImage rotatedImage = op.filter(originalImage, null);//(sourse,destination)
+
+        Dimension resizeDimension = prepareResizeDimension(rotatedImage);
+        int type = rotatedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : rotatedImage.getType();
+        return resizeImage(rotatedImage, resizeDimension, type);
+    }
+
+    public BufferedImage rotateImageRight() {
+        return rotateImage(Math.PI / 2);
+    }
+
+    public BufferedImage rotateImageLeft() {
+        return rotateImage(-Math.PI / 2);
     }
 }

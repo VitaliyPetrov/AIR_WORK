@@ -29,7 +29,7 @@ public class RootPanel extends JPanel {
      * and a flow layout.
      */
     public RootPanel(FileOperations fileOperations) {
-
+        super();
         this.fileOperations = fileOperations;
         listener = new AVListener(this);
         controller = new Controller();

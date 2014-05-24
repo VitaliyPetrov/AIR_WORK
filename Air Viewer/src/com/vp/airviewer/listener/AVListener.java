@@ -76,7 +76,7 @@ public class AVListener extends Listener {
                     CircleGesture circleGesture = new CircleGesture(gesture);
                     // Calculate clock direction using the angle between circle normal and pointable
                     String clockwiseness;
-                    if (circleGesture.pointable().direction().angleTo(circleGesture.normal()) <= Math.PI / 4) {
+                    if (circleGesture.pointable().direction().angleTo(circleGesture.normal()) <= Math.PI / 2) {
                         // Clockwise if angle is less than 90 degrees
                         clockwiseness = "clockwise";
                         rp.rotateImgRight();

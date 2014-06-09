@@ -4,6 +4,7 @@ import com.vp.airviewer.fileutils.FileFinder;
 import com.vp.airviewer.fileutils.FileOperations;
 import com.vp.airviewer.ui.AVFrame;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -15,9 +16,10 @@ import java.util.ArrayList;
  */
 public class AirViewer {
     public static final String IMAGE_FORMATS = "([^\\s]+(\\.(?i)(jpg|png|bmp))$)";
-    public static final String START_PATH = "D:\\SkyDrive\\Photos";
+    public static String START_PATH = "D:\\";
 
     public static void main(String[] args) {
+        START_PATH = new File(".").getAbsolutePath();
         FileFinder imageFinder = new FileFinder();
         ArrayList<String> imageList = null;
         try {
